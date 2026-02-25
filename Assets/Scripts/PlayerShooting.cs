@@ -5,9 +5,18 @@ using UnityEngine;
 public class Player01Shooting : MonoBehaviour
 {
     [SerializeField] private Transform Maybay;
+    public float offsetY;
+    private Vector3 offset;
     public GameObject bulletPrefabs;
     public float shootingInterval;
     private float lastBulletTime;
+    void Start()
+    {
+        if(offset==null)
+        {
+            offset = new Vector3(0, offsetY, 0);
+        }
+    }
 
     void Update()
     {
@@ -22,7 +31,7 @@ public class Player01Shooting : MonoBehaviour
         }
     }
     private void ShootBullet()
-    {
-        Instantiate(bulletPrefabs, Maybay.position, Maybay.rotation);
+    {      
+        Instantiate(bulletPrefabs, Maybay.position + offset, Maybay.rotation);
     }
 }

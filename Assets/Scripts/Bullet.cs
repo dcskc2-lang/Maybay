@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float flySpeed;
+    public int damage;
 
     void Update()
     {
@@ -15,5 +16,14 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var enemy = collision.GetComponent<EnemyHealth>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
+        Destroy(gameObject);
     }
 }
